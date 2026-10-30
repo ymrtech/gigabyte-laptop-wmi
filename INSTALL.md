@@ -39,7 +39,11 @@ The last command has to be run after every reboot. If you have updated the kerne
 This repository is a flake, so the driver is packaged and built against your own kernel package set. Add it to your `flake.nix`:
 
 ```nix
-inputs.gigabyte-laptop-wmi.url = "github:tangalbert919/gigabyte-laptop-wmi";
+inputs.gigabyte-laptop-wmi = {
+  url = "github:tangalbert919/gigabyte-laptop-wmi";
+  # Reuse your nixpkgs instead of pulling in a second copy of it.
+  inputs.nixpkgs.follows = "nixpkgs";
+};
 ```
 
 and enable it in the configuration of the laptop:
